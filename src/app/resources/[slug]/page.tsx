@@ -5,7 +5,9 @@ import { ArrowLeft } from "lucide-react";
 import { Container, Section } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { MDXContent } from "@/components/mdx/mdx-content";
+import { ReadDepthTracker } from "@/components/read-depth-tracker";
 import { getArticles, getArticleBySlug, formatDate } from "@/lib/content";
+import { JsonLd, articleJsonLd, pageMetadata } from "@/lib/seo";
 
 // Fully static: only the slugs below exist. Unknown/draft slugs 404 without any
 // on-demand render.
@@ -23,18 +25,14 @@ export async function generateMetadata({
   const { slug } = await params;
   const article = getArticleBySlug(slug);
   if (!article) return {};
-  return {
+  return pageMetadata({
     title: article.title,
     description: article.description,
-    alternates: { canonical: article.permalink },
-    openGraph: {
-      title: article.title,
-      description: article.description,
-      type: "article",
-      publishedTime: article.date,
-      modifiedTime: article.updated ?? article.date,
-    },
-  };
+    path: article.permalink,
+    type: "article",
+    publishedTime: article.date,
+    modifiedTime: article.updated ?? article.date,
+  });
 }
 
 export default async function ArticlePage({
@@ -48,6 +46,8 @@ export default async function ArticlePage({
 
   return (
     <Section>
+      <JsonLd data={articleJsonLd(article)} />
+      <ReadDepthTracker slug={article.slug} />
       <Container className="max-w-3xl">
         <Link
           href="/resources"
