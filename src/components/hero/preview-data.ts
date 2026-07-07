@@ -39,6 +39,12 @@ export interface PreviewNode {
   emphasis?: boolean;
   /** The one metric that ticks up once on load. */
   ticks?: { from: string; to: string };
+  /** Owning team — surfaces the "one map, tailored views" story. */
+  group?: string;
+  /** Sparkline samples for metric cards (dashboard feel). */
+  spark?: number[];
+  /** Strategy action this metric traces back to (impact badge). */
+  impactFrom?: string;
 }
 
 export interface PreviewEdge {
@@ -53,77 +59,93 @@ export const NODES: PreviewNode[] = [
     id: "hypothesis",
     title: "Faster onboarding lifts activation",
     category: "idea",
-    x: 13,
-    y: 19,
+    x: 12,
+    y: 18,
+    group: "Product",
   },
   {
     id: "action-onboarding",
     title: "Onboarding revamp",
     category: "action",
-    x: 14,
+    x: 12,
     y: 50,
     emphasis: true,
+    group: "Product",
   },
   {
     id: "action-referral",
     title: "Referral program",
     category: "action",
-    x: 13,
+    x: 12,
     y: 82,
+    group: "Growth",
   },
   {
     id: "target-activation",
     title: "Activation rate",
     category: "value",
-    x: 42,
+    x: 36,
     y: 30,
     emphasis: true,
+    group: "Product",
   },
   {
     id: "target-retention",
     title: "Retention",
     category: "value",
-    x: 43,
-    y: 71,
+    x: 37,
+    y: 70,
+    group: "Growth",
   },
   {
     id: "kpi-wau",
     title: "Weekly active users",
     category: "data",
-    x: 69,
-    y: 21,
+    x: 58,
+    y: 19,
     value: "12,480",
     trend: { label: "+8.2%", dir: "up", good: true },
     emphasis: true,
+    group: "Product",
+    spark: [3, 3.4, 3.2, 4.1, 4.6, 5.8, 6.4, 8],
+    impactFrom: "Onboarding revamp",
   },
   {
     id: "kpi-signups",
     title: "New signups",
     category: "data",
-    x: 69,
+    x: 58,
     y: 53,
     value: "1,240",
     trend: { label: "+3.1%", dir: "up", good: true },
+    group: "Growth",
+    spark: [4, 4.3, 4.1, 4.8, 5.2, 5.6, 6.1, 6.7],
+    impactFrom: "Referral program",
   },
   {
     id: "kpi-churn",
     title: "Churn",
     category: "data",
-    x: 68,
-    y: 84,
+    x: 57,
+    y: 80,
     value: "2.4%",
     trend: { label: "-0.5pt", dir: "down", good: true },
+    group: "Growth",
+    spark: [7.2, 6.8, 6.9, 6.1, 5.6, 5.2, 4.7, 4.4],
   },
   {
     id: "northstar-mrr",
     title: "MRR",
     category: "data",
-    x: 89,
-    y: 51,
+    x: 82,
+    y: 52,
     value: "$48.2k",
     trend: { label: "+6.7%", dir: "up", good: true },
     emphasis: true,
     ticks: { from: "$45.1k", to: "$48.2k" },
+    group: "Finance",
+    spark: [3, 3.6, 4, 4.4, 5.1, 5.9, 6.8, 8.2],
+    impactFrom: "Activation work",
   },
 ];
 
@@ -158,21 +180,17 @@ export const EMPHASIS_PATH: string[] = [
 ];
 
 /**
- * Curated 5-node subset for narrow screens — the emphasized trace plus one
- * supporting metric, re-laid-out as a compact vertical-ish flow.
+ * Curated subset for narrow screens — just the core Action → Value → Metric
+ * trace, laid out as a left-anchored cascade so nothing clips or overlaps in a
+ * 16:10 box. (On mobile, cards drop their team tag / sparkline / impact badge
+ * to stay compact — see NodeChip.)
  */
 export const MOBILE_NODE_IDS = new Set([
-  "action-onboarding",
   "target-activation",
   "kpi-wau",
-  "kpi-signups",
-  "northstar-mrr",
 ]);
 
 export const MOBILE_POSITIONS: Record<string, { x: number; y: number }> = {
-  "action-onboarding": { x: 20, y: 22 },
-  "target-activation": { x: 20, y: 74 },
-  "kpi-wau": { x: 62, y: 20 },
-  "kpi-signups": { x: 82, y: 74 },
-  "northstar-mrr": { x: 66, y: 50 },
+  "target-activation": { x: 34, y: 27 },
+  "kpi-wau": { x: 50, y: 64 },
 };
