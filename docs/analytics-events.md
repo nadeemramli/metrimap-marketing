@@ -1,9 +1,29 @@
 # Analytics event taxonomy (CVS-288)
 
-The site uses **`@vercel/analytics`** custom events — **cookieless**, no consent
-banner, no cross-site profiles. Events are fired through the typed `track()`
-wrapper in `src/lib/analytics.ts`, so event names never drift. Analytics must
-never block or break the UI (the wrapper swallows errors).
+Every event is fired through the typed `track()` wrapper in
+`src/lib/analytics.ts`, which fans out to **two sinks**:
+
+1. **`@vercel/analytics`** — cookieless, aggregated.
+2. **GTM dataLayer** (container `GTM-T336859X`, loaded in the root layout with
+   the standard noscript fallback) — GA4 and any other front-end tags are
+   configured **in the GTM UI**, not in code. Each `track()` call pushes
+   `{ event, ...props }`, so the taxonomy below arrives as GTM custom events
+   with their properties as dataLayer variables.
+
+Event names never drift because everything goes through the wrapper, and
+analytics must never block or break the UI (the wrapper swallows errors).
+
+## End-to-end visibility (marketing → app)
+
+- **Front-end**: GTM/GA4 on canvasm.app (this taxonomy + pageviews).
+- **Hand-off**: every app-bound CTA carries `utm_source/medium/campaign/content`
+  (see UTM section below).
+- **Back-end**: the app (use.canvasm.app) runs PostHog, which auto-captures
+  `utm_*` parameters on landing — so a signup traces back to the exact
+  marketing CTA that sent it.
+- **Configure in the GTM UI (not code)**: a GA4 configuration tag on all pages,
+  triggers for the custom events below, and GA4 **cross-domain linking** for
+  `use.canvasm.app` if you also want GA sessions stitched across the boundary.
 
 ## Events
 

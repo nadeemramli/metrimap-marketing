@@ -28,11 +28,26 @@ export default function PrivacyPage() {
 
           <h2>Analytics</h2>
           <p>
-            We use privacy-friendly, <strong>cookieless</strong> analytics to
-            understand which pages are useful. We do not set advertising cookies
-            and we do not build cross-site profiles, so no consent banner is
-            required. We record anonymous, aggregated events such as page views
-            and clicks on our calls to action.
+            We use two kinds of analytics to understand which pages are useful:
+          </p>
+          <ul>
+            <li>
+              <strong>Cookieless analytics</strong> (Vercel Analytics) —
+              anonymous, aggregated page views and clicks, with no cookies and
+              no cross-site profiles.
+            </li>
+            <li>
+              <strong>Google Tag Manager / Google Analytics 4</strong> — usage
+              analytics that set first-party cookies (such as{" "}
+              <code>_ga</code>) to distinguish visits and measure how people
+              find and use the site.
+            </li>
+          </ul>
+          <p>
+            We use this data in aggregate to improve the site. We do not run
+            advertising pixels and we do not sell personal data. If you prefer
+            not to be measured by Google Analytics, browser extensions and
+            settings that block it will not affect your use of this site.
           </p>
 
           <h2>Contact</h2>

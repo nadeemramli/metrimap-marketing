@@ -73,13 +73,18 @@ export function LinkButton({
 }: LinkButtonProps) {
   const classes = buttonClasses({ variant, size, className });
   if (external) {
+    // Forward the anchor-relevant props — dropping onClick here silently
+    // killed CTA analytics once (track() handlers never fired).
+    const { href, children, onClick, target, rel } = props;
     return (
       <a
         className={classes}
-        href={typeof props.href === "string" ? props.href : "#"}
-        {...(props.target ? { target: props.target } : {})}
+        href={typeof href === "string" ? href : "#"}
+        onClick={onClick}
+        {...(target ? { target } : {})}
+        {...(rel ? { rel } : {})}
       >
-        {props.children}
+        {children}
       </a>
     );
   }
