@@ -58,19 +58,33 @@ docs/                         Runbooks + launch/QA docs
 ## Product-system flows (source of truth)
 
 The six operating loops rendered on `/product` (and previewed on the home page)
-live in `src/components/product-system/product-system-flows.ts` using the
-`ProductSystemFlow` / `ProductSystemStep` schema.
+come from the **app's public artifact**:
 
-**This is currently a local copy.** The app repo (`metric-mapping`) is building
-an in-app Product System Flow visualizer with reusable flow definitions
-(expected as `public/product-system-flows.json` or a `productSystemFlows.ts`
-registry). When that lands, the app export becomes the source of truth:
+> `https://use.canvasm.app/product-system-flows.json` — `{ version: 1, flows }`
 
-1. Copy the exported flow definitions over the local registry (ids must stay
-   stable — they anchor step deep-links and analytics).
-2. Keep the marketing-only presentation extras (`impact`, `widgets`) as a thin
-   overlay if the app schema doesn't carry them.
-3. Note the sync date in the file header.
+published by the `metric-mapping` repo and parity-tested against the in-app
+explorer on every commit. Contract:
+`metric-mapping/docs/features/product-system-flows-handoff.md` (condensed on
+Linear CVS-286).
+
+How it works here:
+
+- `npm run sync:flows` (runs automatically on every `npm run build`) fetches
+  the artifact into `src/components/product-system/product-system-flows.json`
+  (machine-written snapshot — **never hand-edit**). If the fetch fails, the
+  build warns loudly and uses the last-synced snapshot.
+- The renderer is **pinned to `version === 1`** — a version bump fails the
+  build (both in the sync script and the loader) instead of rendering garbage.
+- Flow/step ids are stable API — they anchor the `/product#<flow-id>` deep
+  links.
+- **Copy renders verbatim.** Never rewrite titles/summaries/descriptions in
+  this repo; change them app-side in
+  `metric-mapping/src/features/product-system/flows.ts` and they flow through
+  the artifact on the next build.
+- Marketing-only visuals (impact badges, dashboard widget mockups, per-loop
+  deeper links) live as an overlay in
+  `src/components/product-system/flows.ts`, keyed by stable ids — visuals only,
+  no copy.
 
 ## Content authoring
 

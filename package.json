@@ -9,7 +9,8 @@
   "scripts": {
     "predev": "velite",
     "dev": "next dev",
-    "prebuild": "velite --clean",
+    "sync:flows": "node scripts/sync-product-system-flows.mjs",
+    "prebuild": "velite --clean && node scripts/sync-product-system-flows.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
