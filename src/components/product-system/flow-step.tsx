@@ -1,20 +1,19 @@
+import * as React from "react";
 import { cn } from "@/lib/utils";
-import type { ProductSystemStep } from "./product-system-flows";
+import { stepIcon, type ProductSystemStep } from "./flows";
 
 /**
- * A single step in an operating-loop stepper, rendered as a metric-card-styled
- * button. `active` = the selected step; `dimmed` = a non-selected step (pushed
- * back). The 01/02/03 index is part of the visual language.
+ * A single step in an operating-loop stepper. Renders the artifact's `order`
+ * (zero-padded), `label`, and `title` verbatim, with the kind→icon mapping
+ * from the handoff contract. `active` = selected; `dimmed` = pushed back.
  */
 export function FlowStep({
   step,
-  index,
   active,
   dimmed,
   onSelect,
 }: {
   step: ProductSystemStep;
-  index: number;
   active: boolean;
   dimmed: boolean;
   onSelect: () => void;
@@ -32,20 +31,18 @@ export function FlowStep({
         dimmed ? "opacity-40" : "opacity-100",
       )}
     >
-      <span
-        aria-hidden
-        className="mt-0.5 text-base leading-none"
-        style={{ fontFamily: "'Apple Color Emoji','Segoe UI Emoji',sans-serif" }}
-      >
-        {step.emoji}
-      </span>
+      {/* stepIcon returns module-constant lucide components (stable identity) */}
+      {React.createElement(stepIcon(step), {
+        className: "mt-0.5 h-4 w-4 shrink-0 text-foreground/80",
+        "aria-hidden": true,
+      })}
       <span className="min-w-0">
         <span className="flex items-center gap-2">
           <span className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
-            {step.kind}
+            {step.label}
           </span>
           <span className="text-[10px] font-semibold tabular-nums text-muted-foreground/60">
-            {String(index + 1).padStart(2, "0")}
+            {String(step.order).padStart(2, "0")}
           </span>
         </span>
         <span className="mt-0.5 block text-[13px] font-medium leading-tight text-foreground">

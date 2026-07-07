@@ -6,18 +6,24 @@ import { motion, useReducedMotion } from "motion/react";
 import { ArrowRight, Zap } from "lucide-react";
 import {
   PRODUCT_SYSTEM_FLOWS,
+  relationshipLabel,
+  stepIcon,
+  STEP_BADGES,
+  STEP_WIDGETS,
+  FLOW_LINKS,
   type ProductSystemFlow,
-} from "./product-system-flows";
+} from "./flows";
 import { FlowStep } from "./flow-step";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
-/** Small SVG connector between steps. Horizontal on lg+, vertical on mobile
- *  (rotated by the wrapper). Traces foreground once the flow has passed it. */
-function Connector({ reached }: { reached: boolean }) {
+/** Connector between steps carrying the relationship verb ("targets",
+ *  "decomposes into", "certifies" — real meaning, from the artifact).
+ *  Arrow is decorative; the sequence is conveyed by the numbered order. */
+function Connector({ label, reached }: { label?: string; reached: boolean }) {
   const prefersReduced = useReducedMotion();
   return (
-    <span className="flex shrink-0 items-center justify-center rotate-90 py-1 lg:rotate-0 lg:px-0.5 lg:py-0">
+    <span className="flex shrink-0 items-center justify-center gap-1.5 py-1.5 lg:flex-col lg:gap-1 lg:px-1 lg:py-0">
       <svg
         width="26"
         height="14"
@@ -25,7 +31,7 @@ function Connector({ reached }: { reached: boolean }) {
         fill="none"
         aria-hidden
         className={cn(
-          "transition-colors duration-300",
+          "shrink-0 rotate-90 transition-colors duration-300 lg:rotate-0",
           reached ? "text-foreground" : "text-border",
         )}
       >
@@ -46,16 +52,20 @@ function Connector({ reached }: { reached: boolean }) {
           strokeLinejoin="round"
         />
       </svg>
+      {label ? (
+        <span className="max-w-24 text-center text-[10px] italic leading-tight text-muted-foreground">
+          {label}
+        </span>
+      ) : null}
     </span>
   );
 }
 
 /**
  * MarketingProductSystemExplorer — the interactive six-loop explorer on
- * /product. Renders flow tabs, a numbered (01…05) click-through stepper with
- * arrows, and the active step's explanation. Flow definitions come from the
- * product-system flow registry (see product-system-flows.ts for the app-repo
- * sync note); flows may have 4 or 5 steps.
+ * /product, rendered entirely from the app's public flow artifact (see
+ * flows.ts for the contract/sync notes; copy renders verbatim). Supports
+ * per-flow deep links: /product#<flow-id> selects and scrolls to that loop.
  */
 export function MarketingProductSystemExplorer({
   flows = PRODUCT_SYSTEM_FLOWS,
@@ -65,13 +75,28 @@ export function MarketingProductSystemExplorer({
   const [tab, setTab] = React.useState(0);
   const [stepIdx, setStepIdx] = React.useState(0);
   const tabRefs = React.useRef<(HTMLButtonElement | null)[]>([]);
+  const rootRef = React.useRef<HTMLDivElement>(null);
 
-  const flow = flows[tab];
-  const activeStep = flow.steps[stepIdx];
+  // Deep link in: #<flow-id> selects the loop and brings the explorer into
+  // view. Runs post-hydration in a rAF callback (URL hash is external state;
+  // avoids a synchronous setState in the effect body).
+  React.useEffect(() => {
+    const raf = requestAnimationFrame(() => {
+      const id = window.location.hash.slice(1);
+      if (!id) return;
+      const i = flows.findIndex((f) => f.id === id);
+      if (i < 0) return;
+      if (i > 0) setTab(i);
+      rootRef.current?.scrollIntoView({ block: "start" });
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [flows]);
 
   function selectTab(next: number) {
     setTab(next);
     setStepIdx(0);
+    // Deep link out: keep the URL shareable per loop (stable artifact ids).
+    window.history.replaceState(null, "", `#${flows[next].id}`);
   }
 
   function onTabKey(e: React.KeyboardEvent, i: number) {
@@ -87,9 +112,15 @@ export function MarketingProductSystemExplorer({
     }
   }
 
+  const flow = flows[tab];
+  const activeStep = flow.steps[stepIdx];
+  const badge = STEP_BADGES[`${flow.id}/${activeStep.id}`];
+  const widgets = STEP_WIDGETS[`${flow.id}/${activeStep.id}`];
+  const flowLink = FLOW_LINKS[flow.id];
+
   return (
-    <div>
-      {/* Loop tabs */}
+    <div ref={rootRef} className="scroll-mt-24">
+      {/* Loop switcher */}
       <div
         role="tablist"
         aria-label="Operating loops"
@@ -115,7 +146,7 @@ export function MarketingProductSystemExplorer({
                 : "text-muted-foreground hover:text-foreground",
             )}
           >
-            {f.name}
+            {f.shortTitle}
           </button>
         ))}
       </div>
@@ -126,57 +157,61 @@ export function MarketingProductSystemExplorer({
         aria-labelledby={`loop-tab-${flow.id}`}
         className="mt-6"
       >
-        <h3 className="mb-6 max-w-2xl text-pretty text-xl font-semibold tracking-tight sm:text-2xl">
+        {/* Flow copy — verbatim from the artifact */}
+        <h3 className="max-w-2xl text-pretty text-xl font-semibold tracking-tight sm:text-2xl">
           {flow.title}
         </h3>
+        <p className="mt-2 max-w-2xl text-pretty leading-relaxed text-muted-foreground">
+          {flow.summary}
+        </p>
 
-        {/* Stepper — vertical on mobile, one row on lg+ (4 or 5 steps) */}
-        <div className="flex flex-col lg:flex-row lg:items-stretch">
+        {/* Step rail — vertical on mobile, one row on lg+ (4 or 5 steps) */}
+        <div className="mt-6 flex flex-col lg:flex-row lg:items-stretch">
           {flow.steps.map((step, i) => (
             <React.Fragment key={step.id}>
               <div className="lg:flex-1">
                 <FlowStep
                   step={step}
-                  index={i}
                   active={i === stepIdx}
                   dimmed={i !== stepIdx}
                   onSelect={() => setStepIdx(i)}
                 />
               </div>
               {i < flow.steps.length - 1 ? (
-                <Connector reached={i < stepIdx} />
+                <Connector
+                  reached={i < stepIdx}
+                  label={relationshipLabel(
+                    flow,
+                    step.id,
+                    flow.steps[i + 1].id,
+                  )}
+                />
               ) : null}
             </React.Fragment>
           ))}
         </div>
 
-        {/* Active step detail */}
+        {/* Active step detail — description verbatim */}
         <div className="mt-6 rounded-xl border border-border bg-card p-6">
           <div className="flex flex-wrap items-center gap-3">
-            <span
-              aria-hidden
-              className="text-lg leading-none"
-              style={{
-                fontFamily: "'Apple Color Emoji','Segoe UI Emoji',sans-serif",
-              }}
-            >
-              {activeStep.emoji}
-            </span>
+            {/* stepIcon returns module-constant lucide components */}
+            {React.createElement(stepIcon(activeStep), {
+              className: "h-5 w-5 text-foreground",
+              "aria-hidden": true,
+            })}
             <span className="text-sm font-semibold text-foreground">
               {activeStep.title}
             </span>
-            {activeStep.impact ? (
-              <Badge tone="success">{activeStep.impact}</Badge>
-            ) : null}
+            {badge ? <Badge tone="success">{badge}</Badge> : null}
           </div>
 
           <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">
-            {activeStep.explainer}
+            {activeStep.description}
           </p>
 
-          {activeStep.widgets ? (
+          {widgets ? (
             <div className="mt-5 grid gap-3 sm:grid-cols-3">
-              {activeStep.widgets.map((w) => (
+              {widgets.map((w) => (
                 <div
                   key={w.metric}
                   className="rounded-lg border border-border bg-background p-3"
@@ -194,15 +229,26 @@ export function MarketingProductSystemExplorer({
             </div>
           ) : null}
 
-          {flow.href ? (
-            <div className="mt-5">
-              <Link
-                href={flow.href}
-                className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground underline-offset-4 hover:underline"
-              >
-                Go deeper on this loop
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+          {(activeStep.docHref || flowLink) ? (
+            <div className="mt-5 flex flex-wrap items-center gap-5">
+              {activeStep.docHref ? (
+                <a
+                  href={activeStep.docHref}
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground underline-offset-4 hover:underline"
+                >
+                  Learn more
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+              ) : null}
+              {flowLink ? (
+                <Link
+                  href={flowLink.href}
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground underline-offset-4 hover:underline"
+                >
+                  {flowLink.label}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              ) : null}
             </div>
           ) : null}
         </div>
