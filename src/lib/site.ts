@@ -37,6 +37,8 @@ export const SITE = {
   tagline: "Turn strategy into a system your team and agents can run.",
   contactEmail: "hello@canvasm.app",
   twitter: "@canvasm",
+  /** Google Tag Manager container (front-end GA4 etc. configured in GTM). */
+  gtmId: "GTM-T336859X",
 } as const;
 
 /** Append launch UTMs to an app-bound CTA so we can attribute signups (CVS-288). */
