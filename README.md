@@ -55,6 +55,23 @@ src/lib/content.ts            Article accessors over the Velite output
 docs/                         Runbooks + launch/QA docs
 ```
 
+## Product-system flows (source of truth)
+
+The six operating loops rendered on `/product` (and previewed on the home page)
+live in `src/components/product-system/product-system-flows.ts` using the
+`ProductSystemFlow` / `ProductSystemStep` schema.
+
+**This is currently a local copy.** The app repo (`metric-mapping`) is building
+an in-app Product System Flow visualizer with reusable flow definitions
+(expected as `public/product-system-flows.json` or a `productSystemFlows.ts`
+registry). When that lands, the app export becomes the source of truth:
+
+1. Copy the exported flow definitions over the local registry (ids must stay
+   stable — they anchor step deep-links and analytics).
+2. Keep the marketing-only presentation extras (`impact`, `widgets`) as a thin
+   overlay if the app schema doesn't carry them.
+3. Note the sync date in the file header.
+
 ## Content authoring
 
 1. Add `content/articles/<slug>.mdx` with frontmatter (`title`, `description`,

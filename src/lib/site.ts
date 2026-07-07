@@ -19,8 +19,8 @@ export const SITE = {
   docsUrl: "https://docs.canvasm.app",
   docsLive: false,
   description:
-    "Canvasm connects your strategy, your metrics, and the work your teams do — on one living map, so everyone can see how effort moves the numbers.",
-  tagline: "See how your work moves your numbers.",
+    "Canvasm is the operating map for measurable strategy — connecting what the business believes, what teams are doing, what the metrics say, what was learned, who can see what, and what AI agents can safely update.",
+  tagline: "Turn strategy into a system your team and agents can run.",
   contactEmail: "hello@canvasm.app",
   twitter: "@canvasm",
 } as const;
@@ -50,6 +50,8 @@ export function signInHref(location: string): string {
 
 export const PRIMARY_NAV: ReadonlyArray<{ label: string; href: string }> = [
   { label: "Product", href: "/product" },
+  { label: "Use cases", href: "/use-cases" },
+  { label: "Solutions", href: "/solutions" },
   { label: "Resources", href: "/resources" },
   { label: "Pricing", href: "/pricing" },
 ];
@@ -62,6 +64,9 @@ export const FOOTER_NAV: ReadonlyArray<{
     title: "Product",
     links: [
       { label: "Overview", href: "/product" },
+      { label: "Agents & MCP", href: "/product/agents" },
+      { label: "Use cases", href: "/use-cases" },
+      { label: "Solutions", href: "/solutions" },
       { label: "Pricing", href: "/pricing" },
       { label: "Open app", href: SITE.appUrl, external: true },
     ],

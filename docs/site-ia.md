@@ -30,7 +30,10 @@ app surface is literally what's being pointed at.
 | Route | Purpose | Status |
 | --- | --- | --- |
 | `/` | Story-driven home (9 sections, see below) | Live |
-| `/product` | Product System deep page (FlowTabs) + feature grid | Flows land in CVS-286 |
+| `/product` | Six operating loops explorer + feature grid | Live |
+| `/product/agents` | Agents & MCP — structured business context for AI (early access) | Live |
+| `/use-cases` | Use-cases hub (8 cards) | Live |
+| `/solutions` | Audience/solutions hub (8 cards) | Live |
 | `/resources` | Article index (Velite MDX) | Live |
 | `/resources/[slug]` | Article detail | Live |
 | `/pricing` | Honest early-access placeholder | Live |
@@ -44,8 +47,9 @@ There is no separate `/system` route: the Product System flows live on
 
 ### Header
 
-Logo · Product · Resources · Pricing · theme toggle · **Sign in** (ghost →
-`use.canvasm.app`) · **Get started** (primary, tracked, UTM-tagged).
+Logo · Product · Use cases · Solutions · Resources · Pricing · theme toggle ·
+**Sign in** (ghost → `use.canvasm.app`) · **Get started** (primary, tracked,
+UTM-tagged).
 
 ### Footer
 

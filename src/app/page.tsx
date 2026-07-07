@@ -21,12 +21,12 @@ export default function HomePage() {
         <Container className="flex flex-col items-center text-center">
           <Badge tone="outline">Early access</Badge>
           <h1 className="mt-6 max-w-3xl text-balance text-4xl font-semibold tracking-tight sm:text-6xl">
-            See how your work moves your numbers.
+            Turn strategy into a system your team and agents can run.
           </h1>
           <p className="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground sm:text-xl">
-            Canvasm connects your strategy, your metrics, and the work your
-            teams do — on one living map, so everyone can see how effort moves
-            the numbers.
+            Canvasm is the operating map that connects what you believe, what
+            your teams are doing, what the metrics say, what you learned — and
+            what your AI agents can safely update.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <LinkButton external href={getStartedHref("home_hero")} size="lg">
