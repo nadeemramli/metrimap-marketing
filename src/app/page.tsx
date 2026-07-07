@@ -1,20 +1,22 @@
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Container, Section } from "@/components/ui/container";
 import { LinkButton } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CanvasPreview } from "@/components/hero/canvas-preview";
+import { ProblemStrip } from "@/components/home/problem-strip";
+import { HowItWorks } from "@/components/home/how-it-works";
+import { ProductTeaser } from "@/components/home/product-teaser";
+import { CardLanguage } from "@/components/home/card-language";
+import { ForEveryTeam } from "@/components/home/for-every-team";
+import { ImpactStrip } from "@/components/home/impact-strip";
+import { Credibility } from "@/components/home/credibility";
+import { ClosingCTA } from "@/components/home/closing-cta";
 import { getStartedHref } from "@/lib/site";
 
-/**
- * Home — scaffold structure. The interactive hero (CVS-284), full story
- * sections and launch copy (CVS-285), and Product System teaser (CVS-286)
- * land in their own milestones. Kept intentionally simple but on-brand so the
- * scaffold build is meaningful and static.
- */
 export default function HomePage() {
   return (
     <>
+      {/* 1 — Hero */}
       <Section className="pt-16 sm:pt-24">
         <Container className="flex flex-col items-center text-center">
           <Badge tone="outline">Early access</Badge>
@@ -36,7 +38,6 @@ export default function HomePage() {
             </LinkButton>
           </div>
 
-          {/* Interactive canvas preview (CVS-284). */}
           <div className="mt-16 w-full max-w-4xl">
             <CanvasPreview />
             <p className="mt-3 text-center text-xs text-muted-foreground">
@@ -47,26 +48,29 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      <Section className="border-t border-border bg-muted/20">
-        <Container className="flex flex-col items-center gap-6 text-center">
-          <h2 className="max-w-2xl text-balance text-2xl font-semibold tracking-tight sm:text-3xl">
-            Ready to map how your work moves your numbers?
-          </h2>
-          <LinkButton external href={getStartedHref("home_footer")} size="lg">
-            Get started free
-          </LinkButton>
-          <p className="text-sm text-muted-foreground">
-            Prefer a walkthrough?{" "}
-            <Link
-              href="/contact"
-              className="font-medium text-foreground underline-offset-4 hover:underline"
-            >
-              Talk to us
-            </Link>
-            .
-          </p>
-        </Container>
-      </Section>
+      {/* 2 — Problem */}
+      <ProblemStrip />
+
+      {/* 3 — How it works */}
+      <HowItWorks />
+
+      {/* 4 — Product System teaser */}
+      <ProductTeaser />
+
+      {/* 5 — Card language */}
+      <CardLanguage />
+
+      {/* 6 — For every team (visibility) */}
+      <ForEveryTeam />
+
+      {/* 7 — Strategy to impact */}
+      <ImpactStrip />
+
+      {/* 8 — Credibility */}
+      <Credibility />
+
+      {/* 9 — Closing CTA */}
+      <ClosingCTA />
     </>
   );
 }
