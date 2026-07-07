@@ -36,3 +36,7 @@ next-env.d.ts
 
 # lighthouse
 /.lighthouseci/
+.lighthouseci/
+# stray Chrome-for-Testing user-data dirs Lighthouse may drop in CWD
+C:*
+lighthouse.*

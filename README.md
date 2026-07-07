@@ -36,6 +36,7 @@ Everything is statically generated (SSG).
 | `npm run start` | Serve the production build |
 | `npm run check` | `tsc --noEmit` + ESLint |
 | `npm run check-links` | Crawl a running server with linkinator |
+| `npm run lighthouse` | Lighthouse CI against `/`, `/product`, an article |
 | `npm run content` | Rebuild the Velite content cache only |
 
 ## Project map
@@ -74,3 +75,14 @@ domain on the app project is never modified.
 ## Lanes
 
 Built across Linear CVS-282…289 ("Public site — canvasm.app").
+
+## Docs
+
+| Doc | What it covers |
+| --- | --- |
+| [`site-ia.md`](docs/site-ia.md) | Routes, naming discipline, copy voice, home outline |
+| [`cms-threshold.md`](docs/cms-threshold.md) | When to move off Git-MDX; Payload 3 vs Directus; Hetzner ops |
+| [`analytics-events.md`](docs/analytics-events.md) | Event taxonomy + UTM scheme |
+| [`vercel-dns-runbook.md`](docs/vercel-dns-runbook.md) | Safe apex launch without touching `use.canvasm.app` |
+| [`launch-checklist.md`](docs/launch-checklist.md) | Pre-launch gate + Lighthouse thresholds |
+| [`manual-qa.md`](docs/manual-qa.md) | QA matrix + dated pass/fail record |
