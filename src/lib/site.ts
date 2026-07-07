@@ -18,6 +18,16 @@ export const SITE = {
   /** Docs site — links appear ONLY once this is real (CVS-285 rule). */
   docsUrl: "https://docs.canvasm.app",
   docsLive: false,
+  /**
+   * Live read-only demo canvas (the app's public /embed/<canvasId> route).
+   * Leave empty until BOTH app-side prerequisites land, then paste the URL:
+   *  1. a public (is_public) demo canvas with a stable id
+   *  2. the vercel.json carve-out that drops X-Frame-Options on /embed/* and
+   *     adds `frame-ancestors https://canvasm.app https://www.canvasm.app`
+   * While empty, the live-demo section on /product renders the interactive
+   * mockup only (no dead iframe — CVS-285 rule: no broken promises).
+   */
+  demoEmbedUrl: "",
   description:
     "Canvasm is the operating map for measurable strategy — connecting what the business believes, what teams are doing, what the metrics say, what was learned, who can see what, and what AI agents can safely update.",
   tagline: "Turn strategy into a system your team and agents can run.",

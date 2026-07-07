@@ -16,6 +16,7 @@ import { Container, Section } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { LinkButton } from "@/components/ui/button";
 import { MarketingProductSystemExplorer } from "@/components/product-system/product-system-explorer";
+import { LiveDemoSection } from "@/components/product/live-demo";
 import { getStartedHref } from "@/lib/site";
 import { JsonLd, pageMetadata, softwareApplicationJsonLd } from "@/lib/seo";
 
@@ -91,6 +92,8 @@ export default function ProductPage() {
           </div>
         </Container>
       </Section>
+
+      <LiveDemoSection />
 
       <Section className="border-t border-border bg-muted/20">
         <Container>
