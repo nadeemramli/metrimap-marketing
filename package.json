@@ -4,7 +4,7 @@
   "private": true,
   "description": "Public marketing site for Canvasm (canvasm.app). The Metrimap app lives in a separate repo and deploys to use.canvasm.app.",
   "engines": {
-    "node": ">=22"
+    "node": "22.x"
   },
   "scripts": {
     "predev": "velite",
