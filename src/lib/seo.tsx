@@ -90,11 +90,26 @@ export function softwareApplicationJsonLd() {
     description:
       "Canvasm connects strategy, metrics, and work on one living map so teams can see how their work moves the numbers.",
     offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD",
-      description: "Free while in early access",
+      "@type": "AggregateOffer",
+      priceCurrency: "MYR",
+      lowPrice: "99",
+      highPrice: "599",
+      offerCount: 4,
+      description:
+        "Workspace plans with included seats, from RM99 to RM599 per month. Free to start in early access.",
     },
+  };
+}
+
+export function faqJsonLd(items: { q: string; a: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((i) => ({
+      "@type": "Question",
+      name: i.q,
+      acceptedAnswer: { "@type": "Answer", text: i.a },
+    })),
   };
 }
 
