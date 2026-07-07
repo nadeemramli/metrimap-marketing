@@ -29,6 +29,22 @@ export function Header() {
 
         <nav className="hidden items-center gap-1 md:flex" aria-label="Primary">
           {PRIMARY_NAV.map((item) => {
+            const cls =
+              "rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground";
+            if (item.external) {
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className={cls}
+                  onClick={() =>
+                    track("docs_click", { location: "header_nav" })
+                  }
+                >
+                  {item.label}
+                </a>
+              );
+            }
             const active =
               pathname === item.href || pathname.startsWith(item.href + "/");
             return (
@@ -87,16 +103,32 @@ export function Header() {
       {open ? (
         <div className="border-t border-border bg-background md:hidden">
           <Container className="flex flex-col gap-1 py-4">
-            {PRIMARY_NAV.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={closeMenu}
-                className="rounded-md px-3 py-2.5 text-base font-medium text-foreground hover:bg-accent"
-              >
-                {item.label}
-              </Link>
-            ))}
+            {PRIMARY_NAV.map((item) => {
+              const cls =
+                "rounded-md px-3 py-2.5 text-base font-medium text-foreground hover:bg-accent";
+              return item.external ? (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => {
+                    track("docs_click", { location: "mobile_nav" });
+                    closeMenu();
+                  }}
+                  className={cls}
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={closeMenu}
+                  className={cls}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
             <div className="mt-3 flex flex-col gap-2">
               <LinkButton
                 external

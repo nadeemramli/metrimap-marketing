@@ -10,6 +10,7 @@ import {
   GoogleTagManagerNoScript,
 } from "@/components/analytics/gtm";
 import { ConsentManager } from "@/components/analytics/consent-manager";
+import { ScrollDepthTracker } from "@/components/analytics/scroll-depth";
 import { SITE } from "@/lib/site";
 import {
   JsonLd,
@@ -100,6 +101,7 @@ export default function RootLayout({
         <JsonLd data={websiteJsonLd()} />
         <GoogleTagManager />
         <ConsentManager />
+        <ScrollDepthTracker />
         <Analytics />
         <SpeedInsights />
       </body>

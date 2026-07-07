@@ -13,6 +13,8 @@ import {
   PRICING_FAQ,
   type PricingTier,
 } from "@/lib/pricing";
+import { PlanCta } from "@/components/pricing/plan-cta";
+import { PricingFaq } from "@/components/pricing/faq";
 import { JsonLd, pageMetadata, faqJsonLd } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
@@ -67,38 +69,7 @@ function TierCard({ tier }: { tier: PricingTier }) {
         ))}
       </ul>
 
-      <div className="mt-6">
-        {tier.cta.kind === "signup" ? (
-          <LinkButton
-            external
-            href={getStartedHref(tier.cta.location)}
-            variant={tier.recommended ? "primary" : "outline"}
-            size="md"
-            className="w-full"
-          >
-            {tier.cta.label}
-          </LinkButton>
-        ) : (
-          <LinkButton
-            href="/contact"
-            variant={tier.recommended ? "primary" : "outline"}
-            size="md"
-            className="w-full"
-          >
-            {tier.cta.label}
-          </LinkButton>
-        )}
-        {tier.secondary ? (
-          <p className="mt-2 text-center text-xs text-muted-foreground">
-            <Link
-              href={tier.secondary.href}
-              className="underline-offset-4 hover:underline"
-            >
-              {tier.secondary.label}
-            </Link>
-          </p>
-        ) : null}
-      </div>
+      <PlanCta tier={tier} />
     </div>
   );
 }
@@ -181,16 +152,7 @@ export default function PricingPage() {
       <Section>
         <Container className="max-w-3xl">
           <SectionHeading eyebrow="FAQ" title="Common questions." />
-          <dl className="mt-10 space-y-8">
-            {PRICING_FAQ.map((item) => (
-              <div key={item.q}>
-                <dt className="font-semibold tracking-tight">{item.q}</dt>
-                <dd className="mt-2 leading-relaxed text-muted-foreground">
-                  {item.a}
-                </dd>
-              </div>
-            ))}
-          </dl>
+          <PricingFaq items={PRICING_FAQ} />
 
           <div className="mt-14 flex flex-col items-center gap-3">
             <LinkButton external href={getStartedHref("pricing_footer")} size="lg">

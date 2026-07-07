@@ -126,6 +126,9 @@ export function MarketingProductSystemExplorer({
     }
   }
 
+  // De-dupe video_play per loop for the component's lifetime.
+  const playedVideos = React.useRef<Set<string>>(new Set());
+
   const flow = flows[tab];
   const activeStep = flow.steps[stepIdx];
   const badge = STEP_BADGES[`${flow.id}/${activeStep.id}`];
@@ -283,6 +286,14 @@ export function MarketingProductSystemExplorer({
               playsInline
               preload="metadata"
               aria-label={media.caption}
+              onPlay={() => {
+                if (playedVideos.current.has(flow.id)) return;
+                playedVideos.current.add(flow.id);
+                track("video_play", {
+                  loop_id: flow.id,
+                  loop_name: flow.shortTitle,
+                });
+              }}
             />
             {/* eslint-disable-next-line @next/next/no-img-element -- static
                 poster fallback for prefers-reduced-motion; next/image adds
