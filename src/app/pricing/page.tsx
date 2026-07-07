@@ -15,6 +15,7 @@ import {
 } from "@/lib/pricing";
 import { PlanCta } from "@/components/pricing/plan-cta";
 import { PricingFaq } from "@/components/pricing/faq";
+import { BookCall } from "@/components/book-call";
 import { JsonLd, pageMetadata, faqJsonLd } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
@@ -106,6 +107,33 @@ export default function PricingPage() {
             </Link>
             .
           </p>
+
+          {/* Consultation — the platform is affordable; the engagement is the value */}
+          <div className="mx-auto mt-16 max-w-3xl rounded-2xl border border-border bg-card p-8 text-center shadow-sm sm:p-10">
+            <p className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
+              Work with us
+            </p>
+            <h2 className="mt-3 text-balance text-2xl font-semibold tracking-tight sm:text-3xl">
+              The subscription is the easy part.
+            </h2>
+            <p className="mx-auto mt-3 max-w-xl text-pretty leading-relaxed text-muted-foreground">
+              The hard part is turning your strategy into an operating model your
+              team actually runs on. That&apos;s the work we do with you: a
+              guided engagement to map your drivers, wire up the evidence, and
+              stand up your first review cadence — with the platform included.
+            </p>
+            <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <BookCall location="pricing_consultation" />
+              <LinkButton
+                external
+                href={getStartedHref("pricing_consultation_selfserve")}
+                variant="outline"
+                size="lg"
+              >
+                Or start free
+              </LinkButton>
+            </div>
+          </div>
         </Container>
       </Section>
 
