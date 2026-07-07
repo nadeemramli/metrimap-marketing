@@ -47,9 +47,15 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-border pt-6 sm:flex-row sm:items-center">
-          <p className="text-sm text-muted-foreground">
-            © {year} {SITE.name}. All rights reserved.
-          </p>
+          <div>
+            <p className="text-sm text-muted-foreground">
+              © {year} {SITE.name}. All rights reserved.
+            </p>
+            <p className="mt-1 text-xs text-muted-foreground/80">
+              {SITE.name} is operated by {SITE.legalName} (Reg. No.{" "}
+              {SITE.registrationNo}).
+            </p>
+          </div>
           <p className="text-sm text-muted-foreground">
             The {SITE.productName} app lives at{" "}
             <a

@@ -57,8 +57,14 @@ export function organizationJsonLd() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: SITE.name,
+    legalName: SITE.legalName,
     url: SITE.url,
     description: SITE.description,
+    identifier: {
+      "@type": "PropertyValue",
+      propertyID: "SSM Registration No. (Malaysia)",
+      value: SITE.registrationNo,
+    },
     sameAs: [] as string[],
   };
 }

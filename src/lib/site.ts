@@ -11,6 +11,9 @@ export const SITE = {
   name: "Canvasm",
   /** The product/app system name, used where the app surface is meant. */
   productName: "Metrimap",
+  /** Registered operator (SSM, Registration of Businesses Act 1956). */
+  legalName: "Teroka Digital Marketing",
+  registrationNo: "202303018932 (JR0143318-T)",
   domain: "canvasm.app",
   url: "https://canvasm.app",
   /** The signed-in app. Never rewritten or proxied from here. */

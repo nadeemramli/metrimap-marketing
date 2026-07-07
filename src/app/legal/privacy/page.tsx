@@ -19,8 +19,11 @@ export default function PrivacyPage() {
         <Container className="prose prose-neutral max-w-3xl dark:prose-invert">
           <p>
             This page describes how <strong>{SITE.name}</strong> handles data on
-            this marketing site ({SITE.domain}). The {SITE.productName} app at
-            use.canvasm.app has its own in-product privacy terms.
+            this marketing site ({SITE.domain}). {SITE.name} is operated by{" "}
+            <strong>{SITE.legalName}</strong> (Reg. No. {SITE.registrationNo}),
+            registered under the Registration of Businesses Act 1956
+            (Malaysia). The {SITE.productName} app at use.canvasm.app has its
+            own in-product privacy terms.
           </p>
 
           <h2>Analytics</h2>
