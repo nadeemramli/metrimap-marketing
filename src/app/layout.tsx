@@ -9,6 +9,7 @@ import {
   GoogleTagManager,
   GoogleTagManagerNoScript,
 } from "@/components/analytics/gtm";
+import { ConsentManager } from "@/components/analytics/consent-manager";
 import { SITE } from "@/lib/site";
 import {
   JsonLd,
@@ -55,6 +56,16 @@ export const viewport: Viewport = {
  */
 const themeScript = `(function(){try{var t=localStorage.getItem('theme');var d=t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark');}catch(e){}})();`;
 
+/**
+ * Google Consent Mode v2 defaults — MUST run before the GTM container loads.
+ * Everything starts denied; the consent banner (ConsentManager) upgrades via
+ * gtag('consent','update',…). With defaults denied, GA4 still receives
+ * cookieless pings (modeled data) instead of nothing.
+ */
+const consentDefaultScript = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});
+gtag('set','url_passthrough',true);`;
+
 export default function RootLayout({
   children,
 }: {
@@ -68,6 +79,7 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: consentDefaultScript }} />
       </head>
       <body className="min-h-screen bg-background text-foreground antialiased">
         <GoogleTagManagerNoScript />
@@ -87,6 +99,7 @@ export default function RootLayout({
         <JsonLd data={organizationJsonLd()} />
         <JsonLd data={websiteJsonLd()} />
         <GoogleTagManager />
+        <ConsentManager />
         <Analytics />
         <SpeedInsights />
       </body>

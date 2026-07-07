@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/page-header";
 import { Container, Section } from "@/components/ui/container";
+import { ConsentPreferencesButton } from "@/components/analytics/consent-manager";
 import { SITE } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
 
@@ -45,10 +46,14 @@ export default function PrivacyPage() {
           </ul>
           <p>
             We use this data in aggregate to improve the site. We do not run
-            advertising pixels and we do not sell personal data. If you prefer
-            not to be measured by Google Analytics, browser extensions and
-            settings that block it will not affect your use of this site.
+            advertising pixels and we do not sell personal data.
           </p>
+          <p>
+            Analytics cookies are set <strong>only with your consent</strong>{" "}
+            (Google Consent Mode v2 — everything starts denied until you
+            accept). You can change your choice at any time:
+          </p>
+          <ConsentPreferencesButton />
 
           <h2>Contact</h2>
           <p>

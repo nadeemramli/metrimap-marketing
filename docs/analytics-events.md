@@ -25,6 +25,27 @@ analytics must never block or break the UI (the wrapper swallows errors).
   triggers for the custom events below, and GA4 **cross-domain linking** for
   `use.canvasm.app` if you also want GA sessions stitched across the boundary.
 
+## Consent (Google Consent Mode v2)
+
+- CMP: **vanilla-cookieconsent** (open source, MIT, self-hosted —
+  `src/components/analytics/consent-manager.tsx`), themed to the site tokens.
+  Not a Google "partner CMP" — none is required; GA4 needs the Consent Mode
+  signals, which we set natively. In the GA4 setup wizard, mark the banner
+  step as handled.
+- **Defaults denied** for all four signals (`analytics_storage`, `ad_storage`,
+  `ad_user_data`, `ad_personalization`), pushed inline in `<head>` **before**
+  the GTM container loads (layout `consentDefaultScript`). With denied
+  defaults GA4 still receives cookieless pings (modeled data).
+- Accept/decline pushes `gtag('consent','update',…)` plus a
+  `cookie_consent_update` dataLayer event; choices persist in the
+  first-party `cc_cookie` and can be changed anytime via "Manage cookie
+  preferences" on `/legal/privacy`.
+- `hideFromBots` is on (library default): crawlers, Lighthouse, and E2E runs
+  never see the modal. When testing the banner with Playwright, spoof a human
+  UA and `navigator.webdriver=false`.
+- Vercel Analytics is cookieless and runs regardless of the analytics
+  category; only cookie-setting tags (GA4) hang on consent.
+
 ## Events
 
 | Event | Fires when | Properties |
