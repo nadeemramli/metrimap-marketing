@@ -7,6 +7,10 @@ import { Badge } from "@/components/ui/badge";
 import { MDXContent } from "@/components/mdx/mdx-content";
 import { getArticles, getArticleBySlug, formatDate } from "@/lib/content";
 
+// Fully static: only the slugs below exist. Unknown/draft slugs 404 without any
+// on-demand render.
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return getArticles().map((article) => ({ slug: article.slug }));
 }
