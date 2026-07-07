@@ -4,12 +4,14 @@ import { Container, Section } from "@/components/ui/container";
 import { ContactCTA } from "@/components/contact-cta";
 import { LinkButton } from "@/components/ui/button";
 import { SITE, getStartedHref } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact",
   description:
     "Talk to the Canvasm team — book a walkthrough or ask us anything about mapping your strategy, metrics, and work.",
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

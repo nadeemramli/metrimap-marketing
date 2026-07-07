@@ -13,12 +13,14 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { LinkButton } from "@/components/ui/button";
 import { FlowTabs } from "@/components/product-system/flow-tabs";
 import { getStartedHref } from "@/lib/site";
+import { JsonLd, pageMetadata, softwareApplicationJsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Product",
   description:
     "How Canvasm connects strategy, metrics, and work on one living map — from an objective all the way to a dashboard widget.",
-};
+  path: "/product",
+});
 
 const FEATURES = [
   {
@@ -56,6 +58,7 @@ const FEATURES = [
 export default function ProductPage() {
   return (
     <>
+      <JsonLd data={softwareApplicationJsonLd()} />
       <PageHeader
         eyebrow="Product"
         title="One map for strategy, metrics, and work."

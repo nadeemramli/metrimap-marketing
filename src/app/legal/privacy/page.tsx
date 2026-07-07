@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/page-header";
 import { Container, Section } from "@/components/ui/container";
 import { SITE } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Privacy",
   description:
     "How Canvasm handles data on this marketing site — including our cookieless, privacy-friendly analytics.",
-};
+  path: "/legal/privacy",
+});
 
 export default function PrivacyPage() {
   return (

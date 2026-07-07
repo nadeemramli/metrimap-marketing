@@ -4,12 +4,14 @@ import { Container, Section } from "@/components/ui/container";
 import { LinkButton } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { getStartedHref } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Pricing",
   description:
     "Canvasm is in early access. Get started free while we shape pricing with our first teams.",
-};
+  path: "/pricing",
+});
 
 export default function PricingPage() {
   return (

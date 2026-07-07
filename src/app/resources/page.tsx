@@ -5,12 +5,14 @@ import { PageHeader } from "@/components/layout/page-header";
 import { Container, Section } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { getArticles, formatDate } from "@/lib/content";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Resources",
   description:
     "Articles on mapping strategy to metrics to work — how teams use Canvasm and why the connections matter.",
-};
+  path: "/resources",
+});
 
 export default function ResourcesPage() {
   const articles = getArticles();
