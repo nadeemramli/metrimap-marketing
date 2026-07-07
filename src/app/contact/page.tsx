@@ -18,24 +18,25 @@ export default function ContactPage() {
     <>
       <PageHeader
         eyebrow="Contact"
-        title="Let's talk."
-        description="Want a walkthrough, or have a question about whether Canvasm fits your team? We'd love to hear from you."
+        title="Book a discovery call."
+        description="Tell us how you run today and we'll map the first version of your operating model with you. Prefer to explore first? Start free — no call required."
       />
 
       <Section>
         <Container className="grid gap-10 md:grid-cols-2">
           <div className="rounded-xl border border-border bg-card p-8 shadow-sm">
             <h2 className="text-xl font-semibold tracking-tight">
-              Book a walkthrough
+              Book a discovery call
             </h2>
             <p className="mt-3 text-muted-foreground">
-              We&apos;ll show you how a real strategy maps onto Canvasm and how
-              your teams would use it day to day. Email us and we&apos;ll set up
+              A working session, not a sales pitch: we&apos;ll look at your
+              strategy and metrics, map the first slice onto Canvasm, and agree
+              what a full engagement would cover. Email us and we&apos;ll set up
               a time.
             </p>
             <div className="mt-6">
-              <ContactCTA subject="Canvasm — book a walkthrough" location="contact_walkthrough">
-                Email us for a walkthrough
+              <ContactCTA subject="Canvasm — discovery call" location="contact_discovery_call">
+                Email us to book a call
               </ContactCTA>
             </div>
             <p className="mt-4 text-sm text-muted-foreground">

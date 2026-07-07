@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/page-header";
 import { Container, Section } from "@/components/ui/container";
 import { LinkButton } from "@/components/ui/button";
+import { BookCall } from "@/components/book-call";
 import { getStartedHref } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
 
@@ -72,10 +73,26 @@ export default function SolutionsPage() {
             ))}
           </div>
 
-          <div className="mt-14 flex justify-center">
-            <LinkButton external href={getStartedHref("solutions")} size="lg">
-              Get started free
-            </LinkButton>
+          <div className="mt-16 rounded-2xl border border-border bg-muted/30 p-8 text-center sm:p-10">
+            <h2 className="text-balance text-2xl font-semibold tracking-tight">
+              Not sure where your operating model starts?
+            </h2>
+            <p className="mx-auto mt-3 max-w-xl text-pretty leading-relaxed text-muted-foreground">
+              Book a discovery call. We&apos;ll look at how you run today and map
+              the first version of your operating model with you — then hand you
+              the keys.
+            </p>
+            <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <BookCall location="solutions" />
+              <LinkButton
+                external
+                href={getStartedHref("solutions")}
+                variant="outline"
+                size="lg"
+              >
+                Start free
+              </LinkButton>
+            </div>
           </div>
         </Container>
       </Section>

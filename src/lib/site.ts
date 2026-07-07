@@ -39,6 +39,13 @@ export const SITE = {
   twitter: "@canvasm",
   /** Google Tag Manager container (front-end GA4 etc. configured in GTM). */
   gtmId: "GTM-T336859X",
+  /**
+   * Discovery-call booking link (Cal.com / Calendly / etc.). Empty until a
+   * real scheduler exists, in which case "Book a discovery call" CTAs fall
+   * back to /contact — no dead link. Paste the scheduler URL here to switch
+   * every consultation CTA to it site-wide.
+   */
+  bookingUrl: "",
 } as const;
 
 /** Append launch UTMs to an app-bound CTA so we can attribute signups (CVS-288). */
