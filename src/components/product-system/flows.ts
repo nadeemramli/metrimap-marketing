@@ -185,6 +185,36 @@ export const LOOP_MEDIA: Record<
     src: "/loops/strategy-to-impact.mp4",
     poster: "/loops/strategy-to-impact.jpg",
     caption:
-      "The real app, recorded live: following the trace from the onboarding bet to activation, WAU, and MRR on the public demo canvas.",
+      "Recorded live in the app: tracing the operating map from the onboarding bet down to activation, weekly active users, and MRR.",
+  },
+  "teams-to-dashboards": {
+    src: "/loops/teams-to-dashboards.mp4",
+    poster: "/loops/teams-to-dashboards.jpg",
+    caption:
+      "Recorded live in the app: the same map grouped by team, surfaced as the dashboard widgets a review runs on.",
+  },
+  "experimentation-to-knowledge": {
+    src: "/loops/experimentation-to-knowledge.mp4",
+    poster: "/loops/experimentation-to-knowledge.jpg",
+    caption:
+      "Recorded live in the app: a hypothesis becomes an action on the strategy board, moves a metric, and captures the evidence.",
+  },
+  "instrumentation-to-trust": {
+    src: "/loops/instrumentation-to-trust.mp4",
+    poster: "/loops/instrumentation-to-trust.jpg",
+    caption:
+      "Recorded live in the app: a metric's source and definition, its quality checks, and the trusted dashboard they feed.",
+  },
+  "agent-to-operating-map": {
+    src: "/loops/agent-to-operating-map.mp4",
+    poster: "/loops/agent-to-operating-map.jpg",
+    caption:
+      "Recorded live in the app: creating and connecting nodes on the operating map — the same primitives an agent drives through MCP.",
+  },
+  "workflow-orchestration": {
+    src: "/loops/workflow-orchestration.mp4",
+    poster: "/loops/workflow-orchestration.jpg",
+    caption:
+      "Recorded live in the app: the operating cadence — owners, a metric review, and the decision that spawns the next work item.",
   },
 };
