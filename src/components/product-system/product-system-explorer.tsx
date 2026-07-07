@@ -16,6 +16,7 @@ import {
 } from "./flows";
 import { FlowStep } from "./flow-step";
 import { Badge } from "@/components/ui/badge";
+import { track } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
 /** Connector between steps carrying the relationship verb ("targets",
@@ -89,6 +90,12 @@ export function MarketingProductSystemExplorer({
       if (i < 0) return;
       if (i > 0) setTab(i);
       rootRef.current?.scrollIntoView({ block: "start" });
+      // Arriving on a specific loop is real intent — tag it.
+      track("loop_select", {
+        loop_id: flows[i].id,
+        loop_name: flows[i].shortTitle,
+        source: "deeplink",
+      });
     });
     return () => cancelAnimationFrame(raf);
   }, [flows]);
@@ -98,6 +105,12 @@ export function MarketingProductSystemExplorer({
     setStepIdx(0);
     // Deep link out: keep the URL shareable per loop (stable artifact ids).
     window.history.replaceState(null, "", `#${flows[next].id}`);
+    // Which operating loops people actually explore.
+    track("loop_select", {
+      loop_id: flows[next].id,
+      loop_name: flows[next].shortTitle,
+      source: "tab",
+    });
   }
 
   function onTabKey(e: React.KeyboardEvent, i: number) {

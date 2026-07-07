@@ -50,9 +50,11 @@ analytics must never block or break the UI (the wrapper swallows errors).
 
 | Event | Fires when | Properties |
 | --- | --- | --- |
-| `cta_click` | A primary "Get started" CTA is clicked | `location` (e.g. `header`, `home_hero`, `home_closing`, `mobile_menu`) |
-| `use_app_click` | A "Sign in" / open-app link is clicked | `location` (e.g. `header_signin`, `mobile_signin`) |
+| `cta_click` | A primary "Get started" CTA is clicked | `location` (e.g. `header`, `home_hero`, `home_closing`, `pricing_growth`) |
+| `use_app_click` | A "Sign in" / open-app / live-demo link is clicked | `location` (e.g. `header_signin`, `product_live_demo`) |
 | `docs_click` | A docs link is clicked | `location` — **reserved**; only wired once `docs.canvasm.app` is live (`SITE.docsLive`) |
+| `article_view` | An article page mounts | `slug`, `title`, `tags` (comma-joined), `reading_time` — *which posts + topics get read* |
+| `loop_select` | An operating loop is opened in the Product System explorer | `loop_id`, `loop_name`, `source` (`tab` \| `deeplink`) — *which loops resonate* |
 | `contact_intent` | A contact / demo mailto CTA is clicked | `location`, `subject` |
 | `article_read_depth` | Reader passes 25 / 50 / 75 / 100% of an article | `slug`, `depth` (25\|50\|75\|100) |
 
