@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Container, Section } from "@/components/ui/container";
 import { LinkButton } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { CanvasPreview } from "@/components/hero/canvas-preview";
 import { getStartedHref } from "@/lib/site";
 
 /**
@@ -35,11 +36,13 @@ export default function HomePage() {
             </LinkButton>
           </div>
 
-          {/* Placeholder for the interactive canvas preview (CVS-284). */}
+          {/* Interactive canvas preview (CVS-284). */}
           <div className="mt-16 w-full max-w-4xl">
-            <div className="flex aspect-[16/10] w-full items-center justify-center rounded-xl border border-dashed border-border bg-muted/40 text-sm text-muted-foreground">
-              Interactive canvas preview — CVS-284
-            </div>
+            <CanvasPreview />
+            <p className="mt-3 text-center text-xs text-muted-foreground">
+              A live glimpse of a Canvasm map — hover a card to trace its
+              connections.
+            </p>
           </div>
         </Container>
       </Section>
