@@ -1,0 +1,46 @@
+{
+  "name": "metrimap-marketing",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Public marketing site for Canvasm (canvasm.app). The Metrimap app lives in a separate repo and deploys to use.canvasm.app.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "predev": "velite",
+    "dev": "next dev",
+    "prebuild": "velite --clean",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck && npm run lint",
+    "check-links": "linkinator http://localhost:3000 --recurse --skip use.canvasm.app --skip canvasm.app",
+    "content": "velite"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.3.2",
+    "@tailwindcss/typography": "^0.5.20",
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
+    "clsx": "^2.1.1",
+    "geist": "^1.7.2",
+    "lucide-react": "^1.23.0",
+    "motion": "^12.42.2",
+    "next": "^16.2.10",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "tailwindcss": "^4.3.2",
+    "velite": "^0.4.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.5",
+    "@types/node": "^26.1.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.10",
+    "linkinator": "^7.6.1",
+    "typescript": "^6.0.3"
+  }
+}
