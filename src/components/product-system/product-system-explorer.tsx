@@ -11,6 +11,7 @@ import {
   STEP_BADGES,
   STEP_WIDGETS,
   FLOW_LINKS,
+  LOOP_MEDIA,
   type ProductSystemFlow,
 } from "./flows";
 import { FlowStep } from "./flow-step";
@@ -117,6 +118,7 @@ export function MarketingProductSystemExplorer({
   const badge = STEP_BADGES[`${flow.id}/${activeStep.id}`];
   const widgets = STEP_WIDGETS[`${flow.id}/${activeStep.id}`];
   const flowLink = FLOW_LINKS[flow.id];
+  const media = LOOP_MEDIA[flow.id];
 
   return (
     <div ref={rootRef} className="scroll-mt-24">
@@ -252,6 +254,36 @@ export function MarketingProductSystemExplorer({
             </div>
           ) : null}
         </div>
+
+        {/* This loop, live in the app — automated recording of the real
+            product (gif-style loop; reduced-motion users get the poster). */}
+        {media ? (
+          <figure className="mt-6">
+            <video
+              key={media.src}
+              className="w-full rounded-xl border border-border bg-card motion-reduce:hidden"
+              src={media.src}
+              poster={media.poster}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-label={media.caption}
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element -- static
+                poster fallback for prefers-reduced-motion; next/image adds
+                nothing for a local, fixed-size capture */}
+            <img
+              src={media.poster}
+              alt={media.caption}
+              className="hidden w-full rounded-xl border border-border bg-card motion-reduce:block"
+            />
+            <figcaption className="mt-2 text-center text-xs text-muted-foreground">
+              {media.caption}
+            </figcaption>
+          </figure>
+        ) : null}
       </div>
     </div>
   );
