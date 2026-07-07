@@ -5,7 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import { Container, Section } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { MDXContent } from "@/components/mdx/mdx-content";
-import { ReadDepthTracker } from "@/components/read-depth-tracker";
+import { ArticleAnalytics } from "@/components/article-analytics";
 import { getArticles, getArticleBySlug, formatDate } from "@/lib/content";
 import { JsonLd, articleJsonLd, pageMetadata } from "@/lib/seo";
 
@@ -47,7 +47,12 @@ export default async function ArticlePage({
   return (
     <Section>
       <JsonLd data={articleJsonLd(article)} />
-      <ReadDepthTracker slug={article.slug} />
+      <ArticleAnalytics
+        slug={article.slug}
+        title={article.title}
+        tags={article.tags}
+        readingTime={article.metadata.readingTime}
+      />
       <Container className="max-w-3xl">
         <Link
           href="/resources"

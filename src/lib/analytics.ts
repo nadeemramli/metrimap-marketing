@@ -16,7 +16,9 @@ export type AnalyticsEvent =
   | "use_app_click"
   | "docs_click"
   | "contact_intent"
-  | "article_read_depth";
+  | "article_view"
+  | "article_read_depth"
+  | "loop_select";
 
 type Props = Record<string, string | number | boolean | null>;
 

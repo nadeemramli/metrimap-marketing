@@ -6,11 +6,33 @@ import { track } from "@/lib/analytics";
 const MARKS = [25, 50, 75, 100] as const;
 
 /**
- * Fires `article_read_depth` once at each 25/50/75/100% scroll mark (CVS-288).
- * Passive scroll listener, rAF-throttled, no cookies — purely a conversion
- * signal for how far readers get.
+ * Article analytics: fires `article_view` once on mount (which post + its
+ * topic tags + reading time — "what are people actually reading"), then
+ * `article_read_depth` at each 25/50/75/100% scroll mark ("how far they get").
+ * Passive scroll listener, rAF-throttled.
  */
-export function ReadDepthTracker({ slug }: { slug: string }) {
+export function ArticleAnalytics({
+  slug,
+  title,
+  tags,
+  readingTime,
+}: {
+  slug: string;
+  title: string;
+  tags: string[];
+  readingTime: number;
+}) {
+  // article_view — once per mount (per page view).
+  React.useEffect(() => {
+    track("article_view", {
+      slug,
+      title,
+      tags: tags.join(","),
+      reading_time: readingTime,
+    });
+  }, [slug, title, tags, readingTime]);
+
+  // article_read_depth — scroll marks.
   React.useEffect(() => {
     const fired = new Set<number>();
     let ticking = false;
