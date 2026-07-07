@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+  <rect width="180" height="180" rx="40" fill="#0a0a0a"/>
+  <g stroke="#fafafa" stroke-width="10" stroke-linecap="round">
+    <path d="M52 58 L90 90 L128 62" opacity="0.55"/>
+    <path d="M90 90 L90 128" opacity="0.55"/>
+  </g>
+  <g fill="#fafafa">
+    <circle cx="52" cy="58" r="16"/>
+    <circle cx="128" cy="62" r="16"/>
+    <circle cx="90" cy="90" r="19"/>
+    <circle cx="90" cy="130" r="16"/>
+  </g>
+</svg>

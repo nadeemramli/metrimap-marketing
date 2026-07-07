@@ -16,6 +16,7 @@
     "typecheck": "tsc --noEmit",
     "check": "npm run typecheck && npm run lint",
     "check-links": "linkinator http://localhost:3000 --recurse --skip use.canvasm.app --skip canvasm.app",
+    "lighthouse": "lhci autorun",
     "content": "velite"
   },
   "dependencies": {
