@@ -48,6 +48,10 @@ export default function ContactPage() {
               </a>
               .
             </p>
+            <p className="mt-4 text-xs text-muted-foreground/80">
+              {SITE.name} is operated by {SITE.legalName} (Reg. No.{" "}
+              {SITE.registrationNo}).
+            </p>
           </div>
 
           <div className="rounded-xl border border-border bg-card p-8 shadow-sm">

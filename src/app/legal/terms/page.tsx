@@ -18,15 +18,18 @@ export default function TermsPage() {
         <Container className="prose prose-neutral max-w-3xl dark:prose-invert">
           <p>
             These terms cover your use of the <strong>{SITE.name}</strong>{" "}
-            marketing site at {SITE.domain}. Use of the {SITE.productName} app at
-            use.canvasm.app is governed by the terms you accept in the product.
+            marketing site at {SITE.domain}, operated by{" "}
+            <strong>{SITE.legalName}</strong> (Reg. No. {SITE.registrationNo}),
+            registered under the Registration of Businesses Act 1956
+            (Malaysia). Use of the {SITE.productName} app at use.canvasm.app is
+            governed by the terms you accept in the product.
           </p>
 
           <h2>Use of this site</h2>
           <p>
             This site is provided for informational purposes. Content may change
             as the product evolves. Trademarks and content are owned by{" "}
-            {SITE.name}.
+            {SITE.legalName}.
           </p>
 
           <h2>Contact</h2>
