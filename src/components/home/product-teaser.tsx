@@ -2,30 +2,42 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Container, Section } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { FlowTabs } from "@/components/product-system/flow-tabs";
+import { PRODUCT_SYSTEM_FLOWS } from "@/components/product-system/product-system-flows";
 
-/** Compact, interactive teaser for the Product System — the same FlowTabs that
- *  power the full /product page. */
+/**
+ * Compact "operating loops" preview — one card per loop from the shared
+ * product-system flow registry, linking to the interactive explorer on
+ * /product.
+ */
 export function ProductTeaser() {
   return (
     <Section className="border-t border-border bg-muted/20">
       <Container>
         <SectionHeading
           eyebrow="The product system"
-          title="A map that mirrors how your organization actually works."
-          description="Two flows sit at the heart of Canvasm — from strategy down to impact, and from teams out to dashboards. Click through them:"
+          title="Six operating loops, one map."
+          description="Canvasm isn't a diagram — it's the operating loops a measurable strategy runs on, from strategy to proof, from work to evidence, from agent action to trusted business context."
         />
-        <div className="mt-10">
-          <FlowTabs compact />
-        </div>
-        <div className="mt-8">
-          <Link
-            href="/product"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground underline-offset-4 hover:underline"
-          >
-            Explore the full product system
-            <ArrowRight className="h-4 w-4" />
-          </Link>
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {PRODUCT_SYSTEM_FLOWS.map((flow, i) => (
+            <Link
+              key={flow.id}
+              href="/product"
+              className="group flex h-full flex-col rounded-xl border border-border bg-card p-6 shadow-sm transition-colors hover:border-foreground/20"
+            >
+              <span className="text-xs font-semibold tabular-nums text-muted-foreground">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="mt-2 font-semibold tracking-tight">{flow.name}</h3>
+              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
+                {flow.summary}
+              </p>
+              <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-foreground">
+                Explore the loop
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </span>
+            </Link>
+          ))}
         </div>
       </Container>
     </Section>

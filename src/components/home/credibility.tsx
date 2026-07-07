@@ -1,4 +1,5 @@
-import { Plug, Code2, Share2 } from "lucide-react";
+import Link from "next/link";
+import { Plug, Share2, Bot, ArrowRight } from "lucide-react";
 import { Container, Section } from "@/components/ui/container";
 
 const ITEMS = [
@@ -13,9 +14,11 @@ const ITEMS = [
     body: "Embed a live view of any part of your map in a doc, a wiki, or a public page.",
   },
   {
-    icon: Code2,
-    title: "Build on top",
-    body: "An API and assistant-ready tools let you read and update your map programmatically.",
+    icon: Bot,
+    title: "Built for AI agents",
+    body: "Through MCP and the API, agents read your strategy-metric graph and safely update it — structured business context, not screenshots.",
+    href: "/product/agents",
+    linkLabel: "How agents use Canvasm",
   },
 ];
 
@@ -28,9 +31,18 @@ export function Credibility() {
             <div key={item.title} className="flex flex-col gap-3">
               <item.icon className="h-6 w-6 text-foreground" aria-hidden />
               <h3 className="font-semibold tracking-tight">{item.title}</h3>
-              <p className="leading-relaxed text-muted-foreground">
+              <p className="flex-1 leading-relaxed text-muted-foreground">
                 {item.body}
               </p>
+              {item.href ? (
+                <Link
+                  href={item.href}
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground underline-offset-4 hover:underline"
+                >
+                  {item.linkLabel}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              ) : null}
             </div>
           ))}
         </div>
