@@ -18,9 +18,9 @@ export const SITE = {
   url: "https://canvasm.app",
   /** The signed-in app. Never rewritten or proxied from here. */
   appUrl: "https://use.canvasm.app",
-  /** Docs site — links appear ONLY once this is real (CVS-285 rule). */
+  /** Docs site — live as of 2026-07-08; links now appear in nav + footer. */
   docsUrl: "https://docs.canvasm.app",
-  docsLive: false,
+  docsLive: true,
   /**
    * Live read-only demo canvas (the app's public /embed/<canvasId> route).
    * "Canvasm Demo — From Strategy to Impact" — is_public, stable id (marked
@@ -64,11 +64,18 @@ export function signInHref(location: string): string {
   return appHref("/login", location);
 }
 
-export const PRIMARY_NAV: ReadonlyArray<{ label: string; href: string }> = [
+export const PRIMARY_NAV: ReadonlyArray<{
+  label: string;
+  href: string;
+  external?: boolean;
+}> = [
   { label: "Product", href: "/product" },
   { label: "Use cases", href: "/use-cases" },
   { label: "Solutions", href: "/solutions" },
   { label: "Resources", href: "/resources" },
+  ...(SITE.docsLive
+    ? [{ label: "Docs", href: SITE.docsUrl, external: true }]
+    : []),
   { label: "Pricing", href: "/pricing" },
 ];
 
@@ -89,7 +96,12 @@ export const FOOTER_NAV: ReadonlyArray<{
   },
   {
     title: "Resources",
-    links: [{ label: "Articles", href: "/resources" }],
+    links: [
+      { label: "Articles", href: "/resources" },
+      ...(SITE.docsLive
+        ? [{ label: "Docs", href: SITE.docsUrl, external: true }]
+        : []),
+    ],
   },
   {
     title: "Company",
