@@ -160,3 +160,24 @@
     border-radius: var(--radius-sm);
   }
 }
+
+/* ── Consent banner (vanilla-cookieconsent) themed to our tokens ─────── */
+#cc-main {
+  --cc-font-family: var(--font-sans);
+  --cc-bg: var(--card);
+  --cc-primary-color: var(--foreground);
+  --cc-secondary-color: var(--muted-foreground);
+  --cc-btn-primary-bg: var(--primary);
+  --cc-btn-primary-color: var(--primary-foreground);
+  --cc-btn-primary-hover-bg: color-mix(in oklch, var(--primary) 90%, transparent);
+  --cc-btn-secondary-bg: var(--secondary);
+  --cc-btn-secondary-color: var(--secondary-foreground);
+  --cc-btn-secondary-hover-bg: var(--accent);
+  --cc-separator-border-color: var(--border);
+  --cc-toggle-on-bg: var(--success);
+  --cc-cookie-category-block-bg: var(--muted);
+  --cc-cookie-category-block-border: var(--border);
+  --cc-overlay-bg: rgba(0, 0, 0, 0.5);
+  --cc-border-radius: var(--radius-lg);
+  --cc-btn-border-radius: var(--radius-md);
+}
