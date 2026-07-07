@@ -1,7 +1,9 @@
 # Manual QA — canvasm.app (CVS-289)
 
 Record each QA pass as a dated row against a commit SHA. The linked Linear
-**Manual Test** issue is the system of record; this file mirrors it.
+**Manual Test** issue
+([CVS-300](https://linear.app/canvasm/issue/CVS-300)) is the system of record;
+this file mirrors it.
 
 ## Scope
 
