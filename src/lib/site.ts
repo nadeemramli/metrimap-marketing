@@ -23,14 +23,15 @@ export const SITE = {
   docsLive: false,
   /**
    * Live read-only demo canvas (the app's public /embed/<canvasId> route).
-   * Leave empty until BOTH app-side prerequisites land, then paste the URL:
-   *  1. a public (is_public) demo canvas with a stable id
-   *  2. the vercel.json carve-out that drops X-Frame-Options on /embed/* and
-   *     adds `frame-ancestors https://canvasm.app https://www.canvasm.app`
-   * While empty, the live-demo section on /product renders the interactive
-   * mockup only (no dead iframe — CVS-285 rule: no broken promises).
+   * "Canvasm Demo — From Strategy to Impact" — is_public, stable id (marked
+   * as a marketing asset app-side). Both prerequisites verified live:
+   * /embed/* serves no X-Frame-Options and frame-ancestors allows
+   * canvasm.app + www; the app root keeps X-Frame-Options: DENY.
+   * NOTE: frame-ancestors only allows the production origins, so the iframe
+   * is expected to be blocked on localhost — verify on canvasm.app.
    */
-  demoEmbedUrl: "",
+  demoEmbedUrl:
+    "https://use.canvasm.app/embed/7d0612a7-e9a1-4de1-b75e-dd3b6d9ec715",
   description:
     "Canvasm is the operating map for measurable strategy — connecting what the business believes, what teams are doing, what the metrics say, what was learned, who can see what, and what AI agents can safely update.",
   tagline: "Turn strategy into a system your team and agents can run.",
