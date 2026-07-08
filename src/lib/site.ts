@@ -45,7 +45,7 @@ export const SITE = {
    * back to /contact — no dead link. Paste the scheduler URL here to switch
    * every consultation CTA to it site-wide.
    */
-  bookingUrl: "",
+  bookingUrl: "https://calendar.app.google/YZnnNEFSGuJUSMrw9",
 } as const;
 
 /** Append launch UTMs to an app-bound CTA so we can attribute signups (CVS-288). */
