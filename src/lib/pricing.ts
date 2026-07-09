@@ -108,6 +108,114 @@ export const PRICING_TIERS: PricingTier[] = [
   },
 ];
 
+/** A compare-plans cell: included / not included, or a short text value. */
+export type ComparisonValue = boolean | string;
+
+export interface ComparisonRow {
+  label: string;
+  /** Keyed by tier id ("starter" | "growth" | "team" | "pro"). */
+  values: Record<string, ComparisonValue>;
+}
+
+export interface ComparisonGroup {
+  label: string;
+  rows: ComparisonRow[];
+}
+
+/**
+ * Compare-plans matrix for the pricing page. Every row traces back to a
+ * claim already made in a tier's feature list above — same honesty rule:
+ * only what the product actually has today, no invented limits.
+ */
+export const PRICING_COMPARISON: ComparisonGroup[] = [
+  {
+    label: "Workspace",
+    rows: [
+      {
+        label: "Included seats",
+        values: { starter: "1", growth: "3", team: "8", pro: "15" },
+      },
+    ],
+  },
+  {
+    label: "Mapping",
+    rows: [
+      {
+        label: "Metric canvases",
+        values: { starter: true, growth: true, team: true, pro: true },
+      },
+      {
+        label: "Metric trees with causal connections",
+        values: { starter: false, growth: true, team: true, pro: true },
+      },
+      {
+        label: "Evidence notes on metrics",
+        values: { starter: true, growth: true, team: true, pro: true },
+      },
+      {
+        label: "Experiments and strategy actions",
+        values: { starter: false, growth: true, team: true, pro: true },
+      },
+      {
+        label: "Live public embeds of your map",
+        values: { starter: true, growth: true, team: true, pro: true },
+      },
+    ],
+  },
+  {
+    label: "Collaboration",
+    rows: [
+      {
+        label: "Comments and collaboration basics",
+        values: { starter: false, growth: true, team: true, pro: true },
+      },
+      {
+        label: "Shared workspace with team groups",
+        values: { starter: false, growth: false, team: true, pro: true },
+      },
+      {
+        label: "Visibility and access control by audience",
+        values: { starter: false, growth: false, team: true, pro: true },
+      },
+      {
+        label: "Operating dashboards for the review cadence",
+        values: { starter: false, growth: false, team: true, pro: true },
+      },
+      {
+        label: "Higher limits across the map",
+        values: { starter: false, growth: false, team: true, pro: true },
+      },
+    ],
+  },
+  {
+    label: "Data & automation",
+    rows: [
+      {
+        label: "Agents via MCP and API",
+        values: {
+          starter: false,
+          growth: false,
+          team: false,
+          pro: "Early access",
+        },
+      },
+      {
+        label: "Connected data sources (starting with GA4)",
+        values: { starter: false, growth: false, team: false, pro: true },
+      },
+      {
+        label: "Onboarding support",
+        values: {
+          starter: false,
+          growth: "Book onboarding",
+          team: "Talk to us",
+          pro: "Talk to us",
+        },
+      },
+    ],
+  },
+];
+
 /** FAQ — answers stay honest about what's self-serve today. */
 export const PRICING_FAQ: { q: string; a: string }[] = [
   {

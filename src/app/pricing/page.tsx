@@ -11,9 +11,11 @@ import {
   PRICING,
   PRICING_TIERS,
   PRICING_FAQ,
+  PRICING_COMPARISON,
   type PricingTier,
 } from "@/lib/pricing";
 import { PlanCta } from "@/components/pricing/plan-cta";
+import { ComparePlans } from "@/components/pricing/compare-plans";
 import { PricingFaq } from "@/components/pricing/faq";
 import { BookCall } from "@/components/book-call";
 import { JsonLd, pageMetadata, faqJsonLd } from "@/lib/seo";
@@ -134,6 +136,19 @@ export default function PricingPage() {
               </LinkButton>
             </div>
           </div>
+        </Container>
+      </Section>
+
+      {/* Compare plans — feature matrix across tiers */}
+      <Section className="border-t border-border bg-muted/20">
+        <Container>
+          <SectionHeading
+            eyebrow="Compare"
+            title="Compare plans."
+            description="What each plan includes, side by side. Every plan works from the same operating map — pick how much of the loop your team runs on it."
+            align="center"
+          />
+          <ComparePlans tiers={PRICING_TIERS} groups={PRICING_COMPARISON} />
         </Container>
       </Section>
 
